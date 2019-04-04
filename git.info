@@ -11,6 +11,10 @@ git reset head filename
 
 git remote add origin git@github.com:forthehell/leetcode.git
 git push -u origin master
+git branch --set-upstream-to=origin/master  master
+
+#
+git pull origin branchname --allow-unrelated-histories
 
 
 
@@ -18,5 +22,6 @@ git push -u origin master
 
 git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
+git config --global alias.st 'status'
 
 git config user.name
