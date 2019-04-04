@@ -1,0 +1,22 @@
+#git
+
+用git add将文件写进stage
+用git commit将文件写进repository
+
+
+#将文件从stage中移除
+git rm --cached {name}
+git reset head filename
+
+
+git remote add origin git@github.com:forthehell/leetcode.git
+git push -u origin master
+
+
+
+#git config
+
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+git config user.name
