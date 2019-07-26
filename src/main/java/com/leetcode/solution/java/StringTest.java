@@ -13,6 +13,7 @@ public class StringTest {
         System.out.println(str == str1);
         System.out.println(str == str2);
         System.out.println(str1 == str2);
+
         System.out.println(str == str3);
 
         System.out.println(str.equals(str1));
