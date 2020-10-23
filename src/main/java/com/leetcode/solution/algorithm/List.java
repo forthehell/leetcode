@@ -2,8 +2,7 @@ package com.leetcode.solution.algorithm;
 
 import lombok.AllArgsConstructor;
 
-import java.util.Arrays;
-import java.util.stream.IntStream;
+import java.util.StringJoiner;
 
 /**
  * @Author: shixiaolong
@@ -59,12 +58,41 @@ public class List {
 
 
     /**
+     * @param head
+     * @return
+     *
+     * 1, 2, 3, 4, 5
+     */
+    public static ListNode findTailN(ListNode head, int n) {
+        ListNode result = head;
+
+        for (int i = 0; i < n; i++) {
+            if (head == null) {
+                return null;
+            }
+            head = head.next;
+        }
+
+        for(;;){
+            if(head == null){
+                return result;
+            }
+            head = head.next;
+            result = result.next;
+        }
+    }
+
+
+    /**
      * https://leetcode.com/problems/reverse-linked-list/submissions/
      *
      * @param head
      * @return
      */
     public static Node reverse(Node head) {
+
+
+
         Node result = null;
         for (; ; ) {
             if (head == null) {
@@ -240,11 +268,12 @@ public class List {
 
     /**
      * https://leetcode.com/problems/linked-list-cycle-ii/
+     *
      * @param head
      * @return
      */
     public ListNode detectCycle(ListNode head) {
-            return null;
+        return null;
     }
 
 
@@ -322,7 +351,11 @@ public class List {
 
 //        print(mergeKLists(new ListNode[]{listNode1, listNode2, listNode3}));
 
-        print(mergeTwoLists(listNode1, listNode2));
+//        print(mergeTwoLists(listNode1, listNode2));
+
+        System.out.println(findTailN(listNode1,5));
+        System.out.println(findTailN(listNode1,2));
+        System.out.println(findTailN(listNode1,1));
 
     }
 
@@ -339,6 +372,13 @@ public class List {
 
         ListNode(int x) {
             val = x;
+        }
+
+        @Override
+        public String toString() {
+            return new StringJoiner(", ", ListNode.class.getSimpleName() + "[", "]")
+                    .add("val=" + val)
+                    .toString();
         }
     }
 }
