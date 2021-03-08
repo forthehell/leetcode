@@ -13,6 +13,35 @@ public class List {
     Node head;
 
 
+    /**
+     * @param a
+     * @return
+     */
+    public static ListNode removeRepeat(ListNode a) {
+
+        if (a == null) {
+            return null;
+        }
+        ListNode head = a;
+        for (; ; ) {
+            ListNode next = head.next;
+            if (next == null) {
+                break;
+            }
+            if (next.val == head.val) {
+                head.next = next.next;
+            } else {
+                head = next;
+            }
+        }
+        return a;
+    }
+
+    /**
+     * @param a
+     * @param b
+     * @return
+     */
     public static Node add(Node<Integer> a, Node<Integer> b) {
 
         Node<Integer> heada = a;
@@ -59,9 +88,7 @@ public class List {
 
     /**
      * @param head
-     * @return
-     *
-     * 1, 2, 3, 4, 5
+     * @return 1, 2, 3, 4, 5
      */
     public static ListNode findTailN(ListNode head, int n) {
         ListNode result = head;
@@ -73,8 +100,8 @@ public class List {
             head = head.next;
         }
 
-        for(;;){
-            if(head == null){
+        for (; ; ) {
+            if (head == null) {
                 return result;
             }
             head = head.next;
@@ -90,7 +117,6 @@ public class List {
      * @return
      */
     public static Node reverse(Node head) {
-
 
 
         Node result = null;
@@ -313,14 +339,6 @@ public class List {
     }
 
 
-    public static void print(ListNode head) {
-        while (head != null) {
-            System.out.print(head.val + ",");
-            head = head.next;
-        }
-    }
-
-
     public static void main(String[] args) {
 
 //        Node head = new Node(0, null);
@@ -343,27 +361,37 @@ public class List {
 //        System.out.print("\n");
 
 
-        ListNode listNode1 = create(1, 2, 3, 4, 5);
+        ListNode listNode1 = create(0,1, 2, 2, 3, 3,4, 4, 5,7);
         ListNode listNode2 = create(2, 2, 3, 4, 5);
         ListNode listNode3 = create(6, 7, 8);
+
+        System.out.println(print(removeRepeat(listNode1)));
 
 //        print(reverseBetween(listNode, 3, 4));
 
 //        print(mergeKLists(new ListNode[]{listNode1, listNode2, listNode3}));
 
 //        print(mergeTwoLists(listNode1, listNode2));
-
-        System.out.println(findTailN(listNode1,5));
-        System.out.println(findTailN(listNode1,2));
-        System.out.println(findTailN(listNode1,1));
+//
+//        System.out.println(findTailN(listNode1, 5));
+//        System.out.println(findTailN(listNode1, 2));
+//        System.out.println(findTailN(listNode1, 1));
 
     }
 
     @AllArgsConstructor
     private static class Node<T> {
-
         private T v;
         private Node next;
+    }
+
+    public static String print(ListNode t) {
+        StringJoiner sj = new StringJoiner(",", "[", "]");
+        while (t != null) {
+            sj.add(String.valueOf(t.val));
+            t = t.next;
+        }
+        return sj.toString();
     }
 
     public static class ListNode {
