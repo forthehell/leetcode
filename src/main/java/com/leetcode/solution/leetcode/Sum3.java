@@ -2,9 +2,7 @@ package com.leetcode.solution.leetcode;
 
 import com.alibaba.fastjson.JSON;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author forthehell
@@ -12,6 +10,78 @@ import java.util.List;
  */
 public class Sum3 {
 
+
+    /**
+     *https://leetcode-cn.com/problems/subarray-sum-equals-k/
+     * @return
+     */
+    public static int subarraySum(int[] nums,int k){
+        int count = 0;
+        int[] values = new int[nums.length];
+
+        values[0] = nums[0];
+        if( nums[0] == k){
+            count++;
+        }
+        for(int i =1;i < nums.length;i++){
+            values[i] = nums[i];
+            if(nums[i] == k){
+                count++;
+            }
+            for(int j = i-1 ; j >= 0 ;j--){
+                values[j] = nums[i]+values[j];
+                if(values[j] == k){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int subarraySum2(int[] nums,int k){
+        int count = 0;
+        int[] sum = new int[nums.length+1];
+
+        sum[0] = 0;
+        for(int i = 0;i< nums.length;i++){
+            sum[i+1] = nums[i]+sum[i];
+        }
+        for(int i = 1;i < sum.length;i++){
+            for(int j = 0; j <i ;j++){
+                if(sum[i] - sum[j] == k){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int subarraySum3(int[] nums,int k){
+        int count = 0;
+        int[] sum = new int[nums.length+1];
+        sum[0] = 0;
+        for(int i = 0;i< nums.length;i++){
+            sum[i+1] = nums[i]+sum[i];
+        }
+        Map<Integer,Integer> cache = new HashMap<>(sum.length);
+        for(int i = 0;i < sum.length;i++){
+            count += cache.getOrDefault(sum[i] - k,0);
+            cache.compute(sum[i],(key,v)->v ==null?1:++v);
+        }
+        return count;
+    }
 
     public static List<List<Integer>> threeSum1(int[] nums) {
         Arrays.sort(nums);
@@ -109,7 +179,11 @@ public class Sum3 {
 
     public static void main(String[] args) {
 
-        System.out.println(JSON.toJSONString(threeSum1(new int[]{-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6})));
+        System.out.println(subarraySum3(new int[]{1,-1,0},0));
+        System.out.println(subarraySum3(new int[]{1,1,1},2));
+        System.out.println(subarraySum3(new int[]{2,1,3,-1},3));
+
+//        System.out.println(JSON.toJSONString(threeSum1(new int[]{-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6})));
 
     }
 }
